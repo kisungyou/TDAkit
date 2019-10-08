@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1570573495976.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3458227285",
+    "id" : "3BC159A",
+    "lastKnownWriteTime" : 1570574130,
+    "last_content_update" : 1570574130062,
+    "path" : "~/Desktop/TDAkit/R/landscape.norm2.R",
+    "project_path" : "R/landscape.norm2.R",
+    "properties" : {
+        "cursorPosition" : "19,34",
+        "scrollLine" : "7",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

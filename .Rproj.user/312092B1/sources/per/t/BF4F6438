@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1570568083491.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3454777809",
+    "id" : "BF4F6438",
+    "lastKnownWriteTime" : 1570573650,
+    "last_content_update" : 1570573650071,
+    "path" : "~/Desktop/TDAkit/R/auxiliary.R",
+    "project_path" : "R/auxiliary.R",
+    "properties" : {
+        "cursorPosition" : "4,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 6,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

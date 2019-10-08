@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1570571286459.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "2696140811",
+    "id" : "BA5C5B24",
+    "lastKnownWriteTime" : 1570573438,
+    "last_content_update" : 1570573438337,
+    "path" : "~/Desktop/TDAkit/src/cpp_integral.cpp",
+    "project_path" : "src/cpp_integral.cpp",
+    "properties" : {
+        "cursorPosition" : "9,0",
+        "scrollLine" : "0",
+        "tempName" : "Untitled1"
+    },
+    "relative_order" : 7,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "cpp"
+}
