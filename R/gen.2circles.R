@@ -44,3 +44,14 @@ gen.2circles <- function(n=100, sd=0){
   # report
   return(xx)
 }
+
+# library(shapes)
+# data(gorf.dat)
+# 
+# xold = gorf.dat
+# xtmp = array(0,dim(xold))
+# for (k in 1:dim(xold)[3]){
+#   tmpmean = colMeans(xold[,,k])
+#   xtmp[,,k] = xold[,,k] - matrix(rep(tmpmean,dim(xold)[1]), ncol=dim(xold)[2], byrow = TRUE)
+# }
+# xrot = shapes::procGPA(xtmp)$rotated
