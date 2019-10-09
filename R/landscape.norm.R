@@ -1,5 +1,9 @@
 #' \eqn{L_p} norm of a single Persistence Landscape
 #' 
+#' 
+#' @references 
+#' \insertRef{bubenik_persistence_2018}{TDAkit}
+#' 
 #' @export
 landscape.norm <- function(landscape, p=2){
   #############################################

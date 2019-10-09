@@ -9,3 +9,6 @@ landscape.wsum(dlist, weight)
 \description{
 Weighted Sum of Multiple Persistence Landscapes
 }
+\references{
+\insertRef{bubenik_persistence_2018}{TDAkit}
+}

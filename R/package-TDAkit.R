@@ -7,7 +7,7 @@
 #' @aliases TDAkit-package
 #' @import Rdpack
 #' @import ggplot2
-#' @importFrom TDA landscape
+#' @importFrom TDA circleUnif
 #' @importFrom utils packageVersion
 #' @importFrom stats approx rnorm
 #' @importFrom Rcpp evalCpp

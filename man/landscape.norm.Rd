@@ -9,3 +9,6 @@ landscape.norm(landscape, p = 2)
 \description{
 \eqn{L_p} norm of a single Persistence Landscape
 }
+\references{
+\insertRef{bubenik_persistence_2018}{TDAkit}
+}

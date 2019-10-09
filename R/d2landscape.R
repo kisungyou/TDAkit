@@ -1,6 +1,10 @@
 #' Convert Persistence Diagram to Persistence Landscape
 #' 
 #' 
+#' 
+#' @references 
+#' \insertRef{bubenik_persistence_2018}{TDAkit}
+#' 
 #' @export
 d2landscape <- function(diagram, dimension=1, k=0, tseq, 
                         inf.replace=FALSE, inf.repval=2*max(diagram[!is.infinite(diagram[,3]),3])){

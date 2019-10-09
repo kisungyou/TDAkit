@@ -10,3 +10,6 @@ d2landscape(diagram, dimension = 1, k = 0, tseq, inf.replace = FALSE,
 \description{
 Convert Persistence Diagram to Persistence Landscape
 }
+\references{
+\insertRef{bubenik_persistence_2018}{TDAkit}
+}
