@@ -15,6 +15,9 @@ d2landscape <- function(diagram, dimension=1, k=0, tseq,
       stop("* d2landscape : for a matrix-valued input 'diagram', please match the format as 'diagram' object from TDA package.")
     }
   }
+  if (inf.replace){
+    diagram[is.infinite(diagram[,3]),3] = inf.repval
+  }
   dat.dimension = round(as.vector(diagram[,1]))
   dat.birth     = as.vector(diagram[,2])
   dat.death     = as.vector(diagram[,3])
@@ -23,10 +26,8 @@ d2landscape <- function(diagram, dimension=1, k=0, tseq,
   if (!(dimension %in% dat.dimension)){
     stop("* d2landscape : 'diagram' does not have information pertaining to the given 'dimension'.")
   }
-  if (inf.replace){
-    diagram = diagram[is.infinite(diagram[,3]),3] = inf.repval
-  }
-  idin = base::intersect(which((!is.infinite(dat.dimension))), which(dat.dimension==dimension))
+  
+  idin = base::intersect(which((!is.infinite(dat.death))), which(dat.dimension==dimension))
   dat.dimension = dat.dimension[idin] # separate out the ones
   dat.birth     = dat.birth[idin]
   dat.death     = dat.death[idin]

@@ -4,7 +4,7 @@
 \name{TDAkit}
 \alias{TDAkit}
 \alias{TDAkit-package}
-\title{hey}
+\title{Extended Toolkit for Topological Data Analysis}
 \description{
 shi
 }

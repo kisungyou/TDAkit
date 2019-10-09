@@ -1,14 +1,14 @@
 #' Pairwise \eqn{L_p} norm of multiple Persistence Landscapes
 #' 
 #' @export
-landscape.norm2 <- function(dlist, p=2, as.dist=FALSE){
+landscape.normpair <- function(dlist, p=2, as.dist=FALSE){
   #############################################
   # Preprocessing : checkers
   if (!dlist_check(dlist)){
-    stop("* landscape.norm2 : 'dlist' is invalid. Consult with 'd2landscape' for each element in the list.")
+    stop("* landscape.normpair : 'dlist' is invalid. Consult with 'd2landscape' for each element in the list.")
   }
   if (p < 1){
-    stop("* landscape.norm2 : 'p'-norm is defined for the range [1,Inf]. ")
+    stop("* landscape.normpair : 'p'-norm is defined for the range [1,Inf]. ")
   }
   nlist = length(dlist)
   

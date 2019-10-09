@@ -40,9 +40,16 @@ landscape.norm.internal <- function(lmat, tseq, p=2){
 #' @keywords internal
 #' @noRd
 trim.the.norm <- function(lmat){
-  check.small <- function(x){
-    return(all(x < 10*.Machine$double.eps))
+  if ((is.vector(lmat))||(ncol(lmat)==1)){
+    return(as.matrix(lmat))
+  } else {
+    check.small <- function(x){
+      return(all(x < 10*.Machine$double.eps))
+    }
+    lastid = suppressWarnings(min(which(apply(lmat, 2, check.small) == TRUE)) - 1)
+    if (is.infinite(lastid)){
+      lastid = 0
+    }
+    return(lmat[,1:max(lastid,1)])  
   }
-  lastid = (which.min(apply(lmat, 2, check.small)))-1
-  return(lmat[,1:max(lastid,1)])
 }
