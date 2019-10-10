@@ -10,9 +10,7 @@ vis.landscape <- function(landscape, show.k=0){
     stop("* vis.landscape : provide a compatiable landscape object from 'd2landscape'.")
   }
   show.k = round(show.k)
-  
-  
-  
+
   #############################################
   # Create an object
   #   1. remove nulls

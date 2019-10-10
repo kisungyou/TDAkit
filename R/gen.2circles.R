@@ -1,4 +1,4 @@
-#' Generate Two Intertwined Circles
+#' Generate Two Intersecting Filled Circles
 #' 
 #' 
 #' @examples 
@@ -17,7 +17,7 @@
 #' on.exit(par(opar))
 #' 
 #' @export
-gen.2circles <- function(n=100, sd=0){
+gen.2circles <- function(n=496, sd=0){
   #############################################
   # Preprocessing : checkers
   n = round(n)
@@ -27,31 +27,21 @@ gen.2circles <- function(n=100, sd=0){
   if ((length(sd)>1)||(sd < 0)){
     stop("* gen.2circles : 'sd' should be a nonnegative real number.")
   }
+  mysd = as.double(sd)
   
   #############################################
   # generate
-  n1 = round(n/2)
-  n2 = round(n-n1)
-  x1 = TDA::circleUnif(n1)
-  x2 = TDA::circleUnif(n2)
-  x2[,1] = x2[,1] + 1.25
-  xx = rbind(x1,x2)
+  vec.r = stats::runif(n, min=0, max=1)
+  vec.t = stats::runif(n, min=0, max=(2*pi))
+  
+  tmp = cbind(vec.r*cos(vec.t), vec.r*sin(vec.t))
   if (sd > 0){
-    xx = xx + matrix(rnorm(n*2, sd=sd), ncol=2)
+    tmp = tmp + matrix(rnorm(n*2, sd=mysd),ncol=2)
   }
+  n1 = round(n/2)
+  tmp[1:n1,1] = tmp[1:n1,1] + 1.25
   
   #############################################
   # report
-  return(xx)
+  return(tmp)
 }
-
-# library(shapes)
-# data(gorf.dat)
-# 
-# xold = gorf.dat
-# xtmp = array(0,dim(xold))
-# for (k in 1:dim(xold)[3]){
-#   tmpmean = colMeans(xold[,,k])
-#   xtmp[,,k] = xold[,,k] - matrix(rep(tmpmean,dim(xold)[1]), ncol=dim(xold)[2], byrow = TRUE)
-# }
-# xrot = shapes::procGPA(xtmp)$rotated
