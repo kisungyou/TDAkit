@@ -57,6 +57,10 @@ d2landscape <- function(diagram, dimension=1, k=0, tseq,
   if (length(dat.birth) < myKK){ # automatic padding for larger choices
     kdiff  = myKK-length(dat.birth)
     mydiag = rbind(mydiag, cbind(rep(dat.dimension[1], kdiff), rep(0,kdiff), rep(0,kdiff)))
+    
+    dat.dimension = mydiag[,1]
+    dat.birth     = mydiag[,2]
+    dat.death     = mydiag[,3]
     # stop("* d2landscape : for the matching dimension, we have smaller number of topological features than 'kk'. Try a smaller 'k' value.")
   }
   colnames(mydiag) = c("dimension","Birth","Death")
@@ -68,10 +72,10 @@ d2landscape <- function(diagram, dimension=1, k=0, tseq,
   #   lambdas = TDA::landscape(mydiag, dimension=unique(dat.dimension),
   #                            tseq=mytseq, KK=1:myKK)
   # }
-  lambdas = compute_lambdas(mytseq, dat.birth, dat.death, myKK)
-  
-  
-    
+  #
+  # or
+  # lambdas = compute_lambdas(mytseq, dat.birth, dat.death, myKK)
+  lambdas = compute_lambdas(mytseq, dat.birth, dat.death)
   
   
   #############################################
@@ -84,7 +88,7 @@ d2landscape <- function(diagram, dimension=1, k=0, tseq,
 # compute lambdas ---------------------------------------------------------
 #' @keywords internal
 #' @noRd
-compute_lambdas <- function(tseq, births, deaths, maxK){
+compute_lambdas <- function(tseq, births, deaths, maxK=length(births)){
   ntest = length(births)
   ntime = length(tseq)
   
