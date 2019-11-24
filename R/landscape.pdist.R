@@ -35,3 +35,13 @@ landscape.pdist <- function(dlist, p=2, as.dist=FALSE){
     return(output)
   }
 }
+
+
+# internal usage for older dependency -------------------------------------
+#' @keywords internal
+#' @noRd
+landscape.normpair <- function(dlist, p=2, as.dist=FALSE){
+  myp    = round(p)
+  mydist = as.dist
+  return(landscape.pdist(dlist, p=myp, as.dist=mydist))
+}
