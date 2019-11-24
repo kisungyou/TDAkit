@@ -42,9 +42,7 @@ d2landscape <- function(diagram, dimension=1, k=0, tseq,
   } else {
     myKK = kk
   }
-  if (length(dat.birth) < myKK){
-    stop("* d2landscape : for the matching dimension, we have smaller number of topological features than 'kk'. Try a smaller 'k' value.")
-  }
+
   # tseq
   if (missing(tseq)){
     mytseq = seq(from=0, to=max(dat.death), length.out=200)
@@ -56,6 +54,11 @@ d2landscape <- function(diagram, dimension=1, k=0, tseq,
   # Main Computation
   # wrap the data into my diagram : columns are each lambda function; k=1 -> column matrix
   mydiag = cbind(dat.dimension, dat.birth, dat.death)
+  if (length(dat.birth) < myKK){ # automatic padding for larger choices
+    kdiff  = myKK-length(dat.birth)
+    mydiag = rbind(mydiag, cbind(rep(dat.dimension[1], kdiff), rep(0,kdiff), rep(0,kdiff)))
+    # stop("* d2landscape : for the matching dimension, we have smaller number of topological features than 'kk'. Try a smaller 'k' value.")
+  }
   colnames(mydiag) = c("dimension","Birth","Death")
   # # computation
   # if (myKK == 1){
