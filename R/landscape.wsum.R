@@ -11,7 +11,7 @@ landscape.wsum <- function(dlist, weight){
     warning("* landscape.wsum : since 'weight' is missing, we apply arithmetic mean of landscapes.")
     weight = rep(1,length(dlist))/length(dlist)
   }
-  if (!dlist_check(dlist)){
+  if (!check_list_landscape(dlist)){
     stop("* landscape.wsum : an input 'dlist' should be a list of landscapes as 'kit.landscape' objects. Consult with 'd2landscape' function.")
   }
   if (length(weight)!=length(dlist)){

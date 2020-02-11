@@ -2,16 +2,16 @@
 #' 
 #' 
 #' @export
-test.eqdist <- function(dlist, label, method=c("original","discoB","discoF"), mc.iter=496){
+landscape.eqdist <- function(dlist, label, method=c("original","discoB","discoF"), mc.iter=496){
   #############################################
   # Preprocessing : checkers
-  if (!dlist_check(dlist)){ # dlist : list of landscapes
-    stop("* test.eqdist : an input 'dlist' should be a list of landscapes as 'kit.landscape' objects. Consult with 'd2landscape' function.")
+  if (!check_list_landscape(dlist)){ # dlist : list of landscapes
+    stop("* landscape.eqdist : an input 'dlist' should be a list of landscapes as 'kit.landscape' objects. Consult with 'd2landscape' function.")
   }
   nlist = length(dlist)
   label = round(label)      # label vector
   if ((!is.vector(label))||(length(label)!=nlist)||(any(is.infinite(label)))||(any(is.na(label)))||(missing(label))){
-    stop("* test.eqdist : 'label' vector of same length as 'dlist' must be provided without any NaN or Infs.")
+    stop("* landscape.eqdist : 'label' vector of same length as 'dlist' must be provided without any NaN or Infs.")
   }
   mymethod = match.arg(method)
   mc.iter  = round(mc.iter)
@@ -61,6 +61,6 @@ test.eqdist <- function(dlist, label, method=c("original","discoB","discoF"), mc
 #   diagx = ripsDiag(X, maxdimension = 1, maxscale = Inf)$diagram
 #   dlist[[i]] = d2landscape(diagx, dimension=0, k=10, inf.replace = FALSE)
 # }
-# test.eqdist(dlist, c(rep(1,ntest), rep(2,ntest)), method="original")
-# test.eqdist(dlist, c(rep(1,ntest), rep(2,ntest)), method="discoB")
-# test.eqdist(dlist, c(rep(1,ntest), rep(2,ntest)), method="discoF")
+# landscape.eqdist(dlist, c(rep(1,ntest), rep(2,ntest)), method="original")
+# landscape.eqdist(dlist, c(rep(1,ntest), rep(2,ntest)), method="discoB")
+# landscape.eqdist(dlist, c(rep(1,ntest), rep(2,ntest)), method="discoF")

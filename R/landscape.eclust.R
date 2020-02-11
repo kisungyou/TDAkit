@@ -5,7 +5,7 @@
 landscape.eclust <- function(dlist){
   #############################################
   # Preprocessing : checkers
-  if (!dlist_check(dlist)){
+  if (!check_list_landscape(dlist)){
     stop("* landscape.eclust : an input 'dlist' should be a list of landscapes as 'kit.landscape' objects. Consult with 'd2landscape' function.")
   }
   

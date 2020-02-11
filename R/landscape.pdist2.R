@@ -4,8 +4,8 @@
 landscape.pdist2 <- function(dlist1, dlist2, p=2){
   #############################################
   # Preprocessing : checkers
-  if (!dlist_check(dlist1)){    stop("* landscape.pdist2 : 'dlist1' is invalid. Consult with 'd2landscape' for each element in the list.")  }
-  if (!dlist_check(dlist2)){    stop("* landscape.pdist2 : 'dlist2' is invalid. Consult with 'd2landscape' for each element in the list.")  }
+  if (!check_list_landscape(dlist1)){    stop("* landscape.pdist2 : 'dlist1' is invalid. Consult with 'd2landscape' for each element in the list.")  }
+  if (!check_list_landscape(dlist2)){    stop("* landscape.pdist2 : 'dlist2' is invalid. Consult with 'd2landscape' for each element in the list.")  }
   if (p < 1){
     stop("* landscape.pdist2 : 'p'-norm is defined for the range [1,Inf]. ")
   }

@@ -4,14 +4,11 @@
 landscape.mean <- function(dlist){
   #############################################
   # Preprocessing : checkers
-  weight = rep(1,length(dlist))/length(dist)
-  if (!dlist_check(dlist)){
+  weight = rep(1,length(dlist))/length(dlist)
+  if (!check_list_landscape(dlist)){
     stop("* landscape.mean : an input 'dlist' should be a list of landscapes as 'kit.landscape' objects. Consult with 'd2landscape' function.")
   }
-  if (length(weight)!=length(dlist)){
-    stop("* landscape.mean : length of 'weight' vector should equal to the number of landscapes in 'dlist'.")
-  }
-  
+
   #############################################
   # Main Computation
   mainout = dlist_adjust(dlist, as.list=FALSE)

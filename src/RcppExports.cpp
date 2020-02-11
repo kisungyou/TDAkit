@@ -18,6 +18,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// simple_integral_1d
+double simple_integral_1d(arma::vec lvec, arma::vec tseq);
+RcppExport SEXP _TDAkit_simple_integral_1d(SEXP lvecSEXP, SEXP tseqSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type lvec(lvecSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type tseq(tseqSEXP);
+    rcpp_result_gen = Rcpp::wrap(simple_integral_1d(lvec, tseq));
+    return rcpp_result_gen;
+END_RCPP
+}
 // compute_slicemean
 arma::mat compute_slicemean(arma::cube& dcube);
 RcppExport SEXP _TDAkit_compute_slicemean(SEXP dcubeSEXP) {
@@ -41,58 +53,12 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// rcpparma_hello_world
-arma::mat rcpparma_hello_world();
-RcppExport SEXP _TDAkit_rcpparma_hello_world() {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    rcpp_result_gen = Rcpp::wrap(rcpparma_hello_world());
-    return rcpp_result_gen;
-END_RCPP
-}
-// rcpparma_outerproduct
-arma::mat rcpparma_outerproduct(const arma::colvec& x);
-RcppExport SEXP _TDAkit_rcpparma_outerproduct(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::colvec& >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(rcpparma_outerproduct(x));
-    return rcpp_result_gen;
-END_RCPP
-}
-// rcpparma_innerproduct
-double rcpparma_innerproduct(const arma::colvec& x);
-RcppExport SEXP _TDAkit_rcpparma_innerproduct(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::colvec& >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(rcpparma_innerproduct(x));
-    return rcpp_result_gen;
-END_RCPP
-}
-// rcpparma_bothproducts
-Rcpp::List rcpparma_bothproducts(const arma::colvec& x);
-RcppExport SEXP _TDAkit_rcpparma_bothproducts(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::colvec& >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(rcpparma_bothproducts(x));
-    return rcpp_result_gen;
-END_RCPP
-}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_TDAkit_simple_integral", (DL_FUNC) &_TDAkit_simple_integral, 2},
+    {"_TDAkit_simple_integral_1d", (DL_FUNC) &_TDAkit_simple_integral_1d, 2},
     {"_TDAkit_compute_slicemean", (DL_FUNC) &_TDAkit_compute_slicemean, 1},
     {"_TDAkit_compute_slicewsum", (DL_FUNC) &_TDAkit_compute_slicewsum, 2},
-    {"_TDAkit_rcpparma_hello_world", (DL_FUNC) &_TDAkit_rcpparma_hello_world, 0},
-    {"_TDAkit_rcpparma_outerproduct", (DL_FUNC) &_TDAkit_rcpparma_outerproduct, 1},
-    {"_TDAkit_rcpparma_innerproduct", (DL_FUNC) &_TDAkit_rcpparma_innerproduct, 1},
-    {"_TDAkit_rcpparma_bothproducts", (DL_FUNC) &_TDAkit_rcpparma_bothproducts, 1},
     {NULL, NULL, 0}
 };
 

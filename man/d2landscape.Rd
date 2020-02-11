@@ -4,8 +4,14 @@
 \alias{d2landscape}
 \title{Convert Persistence Diagram to Persistence Landscape}
 \usage{
-d2landscape(diagram, dimension = 1, k = 0, tseq, inf.replace = FALSE,
-  inf.repval = 2 * max(diagram[!is.infinite(diagram[, 3]), 3]))
+d2landscape(
+  diagram,
+  dimension = 1,
+  k = 0,
+  tseq,
+  inf.replace = FALSE,
+  inf.repval = 2 * max(diagram[!is.infinite(diagram[, 3]), 3])
+)
 }
 \description{
 Convert Persistence Diagram to Persistence Landscape

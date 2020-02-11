@@ -23,3 +23,13 @@ double simple_integral(arma::mat &lmat, arma::vec tseq){
   }
   return(arma::accu(outval));
 }
+// [[Rcpp::export]]
+double simple_integral_1d(arma::vec lvec, arma::vec tseq){
+  // parameters and setup
+  int TT = tseq.n_elem;
+  double output = 0.0;
+  for (int t=0;t<(TT-1);t++){
+    output += (tseq(t+1)-tseq(t))*(lvec(t+1)+lvec(t))/2.0;
+  }
+  return(output);
+}

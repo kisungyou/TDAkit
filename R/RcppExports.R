@@ -5,27 +5,15 @@ simple_integral <- function(lmat, tseq) {
     .Call('_TDAkit_simple_integral', PACKAGE = 'TDAkit', lmat, tseq)
 }
 
+simple_integral_1d <- function(lvec, tseq) {
+    .Call('_TDAkit_simple_integral_1d', PACKAGE = 'TDAkit', lvec, tseq)
+}
+
 compute_slicemean <- function(dcube) {
     .Call('_TDAkit_compute_slicemean', PACKAGE = 'TDAkit', dcube)
 }
 
 compute_slicewsum <- function(dcube, weight) {
     .Call('_TDAkit_compute_slicewsum', PACKAGE = 'TDAkit', dcube, weight)
-}
-
-rcpparma_hello_world <- function() {
-    .Call('_TDAkit_rcpparma_hello_world', PACKAGE = 'TDAkit')
-}
-
-rcpparma_outerproduct <- function(x) {
-    .Call('_TDAkit_rcpparma_outerproduct', PACKAGE = 'TDAkit', x)
-}
-
-rcpparma_innerproduct <- function(x) {
-    .Call('_TDAkit_rcpparma_innerproduct', PACKAGE = 'TDAkit', x)
-}
-
-rcpparma_bothproducts <- function(x) {
-    .Call('_TDAkit_rcpparma_bothproducts', PACKAGE = 'TDAkit', x)
 }
 

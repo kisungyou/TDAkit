@@ -4,7 +4,7 @@
 landscape.pdist <- function(dlist, p=2, as.dist=FALSE){
   #############################################
   # Preprocessing : checkers
-  if (!dlist_check(dlist)){
+  if (!check_list_landscape(dlist)){
     stop("* landscape.pdist : 'dlist' is invalid. Consult with 'd2landscape' for each element in the list.")
   }
   if (p < 1){

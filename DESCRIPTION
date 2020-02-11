@@ -8,5 +8,5 @@ License: What license is it under?
 Encoding: UTF-8
 Imports: Rcpp, Rdpack, TDA, energy, ggplot2, stats, utils
 LinkingTo: Rcpp, RcppArmadillo
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 RdMacros: Rdpack

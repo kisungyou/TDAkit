@@ -63,7 +63,7 @@ vis.landscape <- function(landscape, show.k=0){
 # diagx  = ripsDiag(X, maxdimension = 1, maxscale = Inf)$diagram
 # myland0 =  d2landscape(diagx, dimension=0, k=0, inf.replace = FALSE)
 # myland1 =  d2landscape(diagx, dimension=1, k=0, inf.replace = FALSE)
-#
+# 
 # vis00 = vis.landscape(myland0, show.k = 0)
 # vis01 = vis.landscape(myland0, show.k = 1)
 # vis02 = vis.landscape(myland0, show.k = 2)
