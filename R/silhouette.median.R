@@ -1,8 +1,9 @@
-#' Geometric Median of Multiple Persistence Silhouettes
+#' Median of Multiple Persistence Silhouettes
 #' 
 #' @export
 silhouette.median <- function(slist, weight=rep(1/length(slist), length(slist)), 
-                              maxiter=496, abstol=1e-6, print.progress=TRUE){
+                              maxiter=496, abstol=1e-6, algorithm=c("asgd","sgd","weiszfeld"), 
+                              sgd.C = 1, sgd.alpha = 0.75, print.progress=TRUE){
   #############################################
   # Preprocessing : checkers
   if (!check_list_silhouette(slist)){
@@ -18,7 +19,21 @@ silhouette.median <- function(slist, weight=rep(1/length(slist), length(slist)),
   mainout = adjust_list_silhouette(slist, as.list=FALSE) # $array (columns) and $tseq
   # some params
   myprog  = as.logical(print.progress)
-  outvec  = compute_median_weiszfeld(mainout$array, mainout$tseq, weight, maxiter, abstol, "silhouette.median", print.progress = myprog)
+  if (missing(algorithm)){
+    algorithm = "weiszfeld"
+  } else {
+    alglist   = c("weiszfeld","sgd","asgd")
+    algorithm = match.arg(tolower(algorithm), alglist)  
+  }
+  outvec  = switch(algorithm,
+                   "weiszfeld" = compute_median_weiszfeld(mainout$array, mainout$tseq, 
+                                                          weight, maxiter, abstol, "silhouette.median", print.progress = myprog),
+                   "sgd"       = compute_median_sgd(mainout$array, mainout$tseq, 
+                                                    weight, maxiter, abstol, "silhouette.median", print.progress = myprog,
+                                                    sgd.C, sgd.alpha),
+                   "asgd"      = compute_median_asgd(mainout$array, mainout$tseq, 
+                                              weight, maxiter, abstol, "silhouette.median", print.progress = myprog,
+                                              sgd.C, sgd.alpha))
   
   #############################################
   # Report the results
@@ -56,16 +71,20 @@ silhouette.median <- function(slist, weight=rep(1/length(slist), length(slist)),
 # }
 # smeanst <- silhouette.mean(liststoc)
 # smean   <- silhouette.mean(slist)
-# smedian <- silhouette.median(slist, print.progress = TRUE, abstol = 1e-15)
+# smedian    <- silhouette.median(slist, print.progress = TRUE, abstol = 1e-15)
+# smediansgd <- silhouette.median(slist, print.progress = TRUE, abstol = 1e-15, algorithm = "sgd", sgd.C=0.01)
+# smedianasgd <- silhouette.median(slist, print.progress = TRUE, abstol = 1e-15, algorithm = "asgd", sgd.C=0.01)
 # #smedian <- silhouette.median(liststoc, print.progress = TRUE, abstol = 1e-15)
 # 
-# visualize
+# # visualize
 # ymax  <- 0.08
-# opar  <- par(mfrow=c(2,3))
+# opar  <- par(mfrow=c(2,4))
 # for (i in 1:2){
 #   plot(slist[[i]]$tseq, slist[[i]]$lambda, "l", main=paste0("Silhouette No. ",i), ylim=c(0,ymax))
 # }
 # plot(diags$tseq, diags$lambda, "l", main="Large Data", ylim=c(0,ymax))
 # plot(smean$tseq, smean$lambda, "l", main="Stochastic Mean", ylim=c(0,ymax))
 # plot(smeanst$tseq, smeanst$lambda, "l", main="mean Silhouette", ylim=c(0,ymax))
-# plot(smedian$tseq, smedian$lambda, "l", main="median Silhouette", ylim=c(0,ymax))
+# plot(smedian$tseq, smedian$lambda, "l", main="median:Weiszfeld", ylim=c(0,ymax))
+# plot(smediansgd$tseq, smediansgd$lambda, "l", main="median:SGD", ylim=c(0,ymax))
+# plot(smedianasgd$tseq, smedianasgd$lambda, "l", main="median:ASGD", ylim=c(0,ymax))

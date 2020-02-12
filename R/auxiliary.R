@@ -17,7 +17,9 @@
 #         - as.list = TRUE;  return as list with common tseq
 #         - as.list = FALSE; list$array 2d array (T,nlist) & list$tseq
 #         - since it's ECDF-like, we need ECDF manipulation
-# (6) compute_median
+# (6) compute_median_weiszfeld
+#     compute_median_sgd
+#     compute_median_asgd
 
 # (1) check_list_landscape ------------------------------------------------
 #' @keywords internal
@@ -388,14 +390,112 @@ compute_median_weiszfeld <- function(cols, tseq, weights, maxiter, abstol, fname
     sol.inc = sqrt(sum(abs(sol.new-sol.old)^2))
     sol.old = sol.new
     if (sol.inc < abstol){
-      print(paste0("* ",fname," : iteration ",i,"/",maxiter," terminates for small incremental change..", sep=""))
+      if (print.progress){
+        print(paste0("* ",fname," : iteration ",i,"/",maxiter," terminates for small incremental change..", sep=""))  
+      }
       break
     }
-    if (i%%5 == 0){
+    if (print.progress){
       print(paste0("* ",fname," : iteration ",i,"/",maxiter," complete..", sep=""))
     }
   }
   
   # return
   return(sol.old)
+}
+# (6-2) SGD
+#       Stochastic Gradient by Cardot (Bernoulli, 2013)
+#' @keywords internal
+#' @noRd
+compute_median_sgd <- function(cols, tseq, weights, maxiter, abstol, fname, print.progress=FALSE,
+                               par.C, par.alpha){
+  # parameter & shuffling
+  nsummary = ncol(cols)
+  cols     = cols[,base::sample(1:nsummary)]
+  epsmall  = 100*(.Machine$double.eps)
+  
+  # setup for iterative update
+  z0     = as.vector(cols[,1])
+  zold   = z0
+  zstack = c() # columns would be
+  for (i in 1:(nsummary-1)){
+    # prepare
+    xnow   = cols[,(i+1)] # we should start from the second one.
+    xzdiff = xnow-zold    # x_{n+1} - z_{n}
+    xznorm = sqrt(simple_integral_1d( (xzdiff^2), tseq))
+    if (xznorm < epsmall){
+      xznorm = xznorm + epsmall
+    }
+    gamma.sgd = ifelse(i < 2, par.C, par.C*(i^(-par.alpha)))
+    
+    # update
+    znew   = zold + gamma.sgd*(xzdiff/xznorm)
+    zstack = cbind(zstack, znew)
+    zinc   = sqrt(sum(znew-zold)^2)
+    zold   = znew
+    
+    # stopping criterion
+    if (zinc < abstol){
+      if (print.progress){
+        print(paste0("* ",fname," : iteration ",i,"/",nsummary-1," terminates for small incremental change..", sep=""))  
+      }
+      break
+    }
+    if (print.progress){
+      print(paste0("* ",fname," : iteration ",i,"/",nsummary-1," complete..", sep=""))
+    }
+  }
+  
+  # return
+  return(zold)
+}
+# (6-3) ASGD
+#       Aveeraged Stochastic Gradient by Cardot (Bernoulli, 2013)
+#' @keywords internal
+#' @noRd
+compute_median_asgd <- function(cols, tseq, weights, maxiter, abstol, fname, print.progress=FALSE,
+                               par.C, par.alpha){
+  # parameter & shuffling
+  nsummary = ncol(cols)
+  cols     = cols[,base::sample(1:nsummary)]
+  epsmall  = 100*(.Machine$double.eps)
+  
+  # setup for iterative update
+  z0     = as.vector(cols[,1])
+  zold   = z0
+  zstack = c() # columns would be
+  for (i in 1:(nsummary-1)){
+    # prepare
+    xnow   = cols[,(i+1)] # we should start from the second one.
+    xzdiff = xnow-zold    # x_{n+1} - z_{n}
+    xznorm = sqrt(simple_integral_1d( (xzdiff^2), tseq))
+    if (xznorm < epsmall){
+      xznorm = xznorm + epsmall
+    }
+    gamma.sgd = ifelse(i < 2, par.C, par.C*(i^(-par.alpha)))
+    
+    # update
+    znew   = zold + gamma.sgd*(xzdiff/xznorm)
+    zstack = cbind(zstack, znew)
+    zinc   = sqrt(sum(znew-zold)^2)
+    zold   = znew
+    
+    # stopping criterion
+    if (zinc < abstol){
+      if (print.progress){
+        print(paste0("* ",fname," : iteration ",i,"/",nsummary-1," terminates for small incremental change..", sep=""))  
+      }
+      break
+    }
+    if (print.progress){
+      print(paste0("* ",fname," : iteration ",i,"/",nsummary-1," complete..", sep=""))
+    }
+  }
+  
+  # We need averaging
+  z0bar = rep(0,length(tseq))
+  for (i in 1:ncol(zstack)){
+    z0bar = z0bar + (1/i)*(as.vector(zstack[,i])-z0bar)
+  }
+  return(z0bar)
 }

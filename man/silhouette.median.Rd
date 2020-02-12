@@ -2,16 +2,19 @@
 % Please edit documentation in R/silhouette.median.R
 \name{silhouette.median}
 \alias{silhouette.median}
-\title{Geometric Median of Multiple Persistence Silhouettes}
+\title{Median of Multiple Persistence Silhouettes}
 \usage{
 silhouette.median(
   slist,
   weight = rep(1/length(slist), length(slist)),
   maxiter = 496,
   abstol = 1e-06,
+  algorithm = c("asgd", "sgd", "weiszfeld"),
+  sgd.C = 1,
+  sgd.alpha = 0.75,
   print.progress = TRUE
 )
 }
 \description{
-Geometric Median of Multiple Persistence Silhouettes
+Median of Multiple Persistence Silhouettes
 }

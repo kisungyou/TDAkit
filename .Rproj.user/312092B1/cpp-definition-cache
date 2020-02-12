@@ -9,10 +9,19 @@
                 "name" : "simple_integral(arma::mat &, arma::vec)",
                 "parent_name" : "",
                 "usr" : "c:@F@simple_integral#&$@N@arma@C@Mat>#d#$@N@arma@C@Col>#d#"
+            },
+            {
+                "column" : 8,
+                "file" : "/home/kisung/Desktop/TDAkit/src/cpp_integral.cpp",
+                "kind" : 6,
+                "line" : 27,
+                "name" : "simple_integral_1d(arma::vec, arma::vec)",
+                "parent_name" : "",
+                "usr" : "c:@F@simple_integral_1d#$@N@arma@C@Col>#d#S0_#"
             }
         ],
         "file" : "/home/kisung/Desktop/TDAkit/src/cpp_integral.cpp",
-        "file_last_write" : 1570573438
+        "file_last_write" : 1581538452
     },
     {
         "definitions" : [
@@ -36,48 +45,6 @@
             }
         ],
         "file" : "/home/kisung/Desktop/TDAkit/src/cpp_wsum.cpp",
-        "file_last_write" : 1570567020
-    },
-    {
-        "definitions" : [
-            {
-                "column" : 11,
-                "file" : "/home/kisung/Desktop/TDAkit/src/rcpparma_hello_world.cpp",
-                "kind" : 6,
-                "line" : 18,
-                "name" : "rcpparma_hello_world",
-                "parent_name" : "",
-                "usr" : "c:@F@rcpparma_hello_world#"
-            },
-            {
-                "column" : 11,
-                "file" : "/home/kisung/Desktop/TDAkit/src/rcpparma_hello_world.cpp",
-                "kind" : 6,
-                "line" : 30,
-                "name" : "rcpparma_outerproduct(const arma::colvec &)",
-                "parent_name" : "",
-                "usr" : "c:@F@rcpparma_outerproduct#&1$@N@arma@C@Col>#d#"
-            },
-            {
-                "column" : 8,
-                "file" : "/home/kisung/Desktop/TDAkit/src/rcpparma_hello_world.cpp",
-                "kind" : 6,
-                "line" : 38,
-                "name" : "rcpparma_innerproduct(const arma::colvec &)",
-                "parent_name" : "",
-                "usr" : "c:@F@rcpparma_innerproduct#&1$@N@arma@C@Col>#d#"
-            },
-            {
-                "column" : 12,
-                "file" : "/home/kisung/Desktop/TDAkit/src/rcpparma_hello_world.cpp",
-                "kind" : 6,
-                "line" : 47,
-                "name" : "rcpparma_bothproducts(const arma::colvec &)",
-                "parent_name" : "",
-                "usr" : "c:@F@rcpparma_bothproducts#&1$@N@arma@C@Col>#d#"
-            }
-        ],
-        "file" : "/home/kisung/Desktop/TDAkit/src/rcpparma_hello_world.cpp",
-        "file_last_write" : 1570552952
+        "file_last_write" : 1581538452
     }
 ]
