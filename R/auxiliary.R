@@ -3,9 +3,7 @@
 #     check_list_silhouette 
 #     check_list_apf
 #     check_list_napf
-# (2) dlist_adjust : adjust and return to 
-#         - as.list = FALSE; list$array3d 3d array (T,K,nlist) & list$tseq
-#         - as.list = TRUE;  dlist by logical
+
 # (3) adjust_list_silhouette 
 #         - as.list = TRUE;  return as list with common tseq
 #         - as.list = FALSE; list$array 2d array (T,nlist) & list$tseq
@@ -22,17 +20,7 @@
 #     compute_median_asgd
 
 # (1) check_list_landscape ------------------------------------------------
-#' @keywords internal
-#' @noRd
-check_list_landscape <- function(dlist){
-  cond1 = (is.list(dlist)&&(length(dlist)>1))
-  cond2 = all(unlist(lapply(dlist, inherits, "kit.landscape"))==TRUE)
-  if (cond1&&cond2){
-    return(TRUE)
-  } else {
-    return(FALSE)
-  }
-}
+
 #' @keywords internal
 #' @noRd
 check_list_silhouette <- function(slist){
@@ -68,94 +56,6 @@ check_list_napf <- function(alist){
 }
 
 
-
-
-# (2) dlist_adjust --------------------------------------------------------
-#' @keywords internal
-#' @noRd
-dlist_adjust <- function(dlist, as.list=TRUE){
-  # 1. check if it is a list of landscapes
-  if (!check_list_landscape(dlist)){
-    stop("* dlist_adjust : the given input is not a proper list of landscapes.")
-  }
-  # 2. check same dimension or not
-  nlist   = length(dlist)
-  vec.dim = rep(0,nlist)
-  for (i in 1:nlist){
-    vec.dim[i] = dlist[[i]]$dimension
-  }
-  if (length(unique(vec.dim))!=1){
-    stop("* dlist_adjust : all landscapes should be computed for the same dimension.")
-  }
-  # 3. max.k
-  vec.k = rep(0,nlist)
-  for (i in 1:nlist){
-    if (is.vector(dlist[[i]]$lambda)){
-      vec.k[i] = 1
-    } else {
-      vec.k[i] = ncol(dlist[[i]]$lambda)
-    }
-  }
-  maxk = unique(max(vec.k))
-
-  # 4. vect
-  mytmin = 0
-  mytmax = 0
-  mytlength = 0
-  for (i in 1:nlist){
-    cseq = dlist[[i]]$tseq
-    if (min(cseq) <= mytmin){      mytmin = min(cseq)    }
-    if (max(cseq) >= mytmax){      mytmax = max(cseq)    }
-    if (length(cseq) > mytlength){      mytlength = length(cseq)    }
-  }
-  vect = base::seq(from=mytmin, to=mytmax, length=mytlength)
-  
-  
-  # 5. compute into 3d array
-  output = array(0,c(length(vect), maxk, nlist))
-  for (i in 1:nlist){
-    tgt = dlist[[i]]
-    if ((length(tgt$tseq)==length(vect))&&(all(tgt$tseq==vect))){
-      output[,1:ncol(tgt$lambda),i] = tgt$lambda
-    } else {
-      output[,1:ncol(tgt$lambda),i] = dlist_adjust_single(tgt$lambda, tgt$tseq, vect)
-    }
-  }
-  output[is.na(output)] = 0
-  output[(output<0)] = 0
-  
-  # 6. return the output
-  if (as.list){
-    outlist = list()
-    for (i in 1:nlist){
-      tmplist = list(lambda=output[,,i], tseq=vect, dimension=tgt$dimension)
-      class(tmplist) = "kit.landscape"
-      outlist[[i]] = tmplist
-    }
-    return(outlist)
-  } else {
-    outlist = list()
-    outlist$array3d = output
-    outlist$tseq    = vect
-    return(outlist)
-  }
-}
-#' @keywords internal
-#' @noRd
-dlist_adjust_single <- function(lmat, tseq, newtseq){
-  if (is.vector(lmat)){
-    lmat = matrix(lmat)
-  }
-  TT = length(newtseq)
-  KK = ncol(lmat)
-  output = array(0,c(TT,KK))
-  for (i in 1:KK){
-    ytmp = stats::approx(tseq, as.vector(lmat[,i]), xout=newtseq)$y
-    ytmp[is.na(ytmp)] = 0
-    output[,i] = ytmp
-  }
-  return(output)
-}
 
 # (3) adjust_list_silhouette ----------------------------------------------
 #' @keywords internal

@@ -30,7 +30,7 @@ arma::mat compute_slicewsum(arma::cube &dcube, arma::vec weight){
   arma::mat jiwoongboy(n,p,fill::zeros);
   arma::mat tgtslice(n,p,fill::zeros);
   for (int i=0;i<k;i++){
-    tgtslice = dcube.slice(i);
+    tgtslice   = dcube.slice(i);
     jiwoongboy = jiwoongboy + (weight(i)/allwsum)*tgtslice;
   }
   return(jiwoongboy);

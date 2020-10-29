@@ -1,14 +1,14 @@
 #' Extended Toolkit for Topological Data Analysis
-#' 
-#' shi
 #'
 #' @docType package
 #' @name TDAkit
+#' @noRd
 #' @aliases TDAkit-package
-#' @import Rdpack
 #' @import ggplot2
+#' @importFrom Rdpack reprompt Rdpack_bibstyles
+#' @importFrom TDAstats calculate_homology
 #' @importFrom energy eqdist.etest kgroups energy.hclust
-#' @importFrom TDA circleUnif
+#' @importFrom TDA wasserstein alphaShapeDiag
 #' @importFrom utils packageVersion
 #' @importFrom stats approx rnorm runif
 #' @importFrom Rcpp evalCpp

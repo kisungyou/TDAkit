@@ -30,6 +30,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// routine_mds
+arma::mat routine_mds(arma::mat& dmat, int ndim);
+RcppExport SEXP _TDAkit_routine_mds(SEXP dmatSEXP, SEXP ndimSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type dmat(dmatSEXP);
+    Rcpp::traits::input_parameter< int >::type ndim(ndimSEXP);
+    rcpp_result_gen = Rcpp::wrap(routine_mds(dmat, ndim));
+    return rcpp_result_gen;
+END_RCPP
+}
 // compute_slicemean
 arma::mat compute_slicemean(arma::cube& dcube);
 RcppExport SEXP _TDAkit_compute_slicemean(SEXP dcubeSEXP) {
@@ -57,6 +69,7 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_TDAkit_simple_integral", (DL_FUNC) &_TDAkit_simple_integral, 2},
     {"_TDAkit_simple_integral_1d", (DL_FUNC) &_TDAkit_simple_integral_1d, 2},
+    {"_TDAkit_routine_mds", (DL_FUNC) &_TDAkit_routine_mds, 2},
     {"_TDAkit_compute_slicemean", (DL_FUNC) &_TDAkit_compute_slicemean, 1},
     {"_TDAkit_compute_slicewsum", (DL_FUNC) &_TDAkit_compute_slicewsum, 2},
     {NULL, NULL, 0}

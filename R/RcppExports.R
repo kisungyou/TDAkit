@@ -9,6 +9,10 @@ simple_integral_1d <- function(lvec, tseq) {
     .Call('_TDAkit_simple_integral_1d', PACKAGE = 'TDAkit', lvec, tseq)
 }
 
+routine_mds <- function(dmat, ndim) {
+    .Call('_TDAkit_routine_mds', PACKAGE = 'TDAkit', dmat, ndim)
+}
+
 compute_slicemean <- function(dcube) {
     .Call('_TDAkit_compute_slicemean', PACKAGE = 'TDAkit', dcube)
 }

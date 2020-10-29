@@ -4,9 +4,9 @@ Title: Extended Toolkit for Topological Data Analysis
 Version: 0.1.0
 Authors@R: c(person("Kisung", "You", role = c("aut", "cre"),email = "kyoustat@gmail.com",comment=c(ORCID="0000-0002-8584-459X")),person("Byeongsu","Yu",role="aut",email="byeongsu.yu@math.tamu.edu"))
 Description: More about what it does (maybe more than one line)
-License: What license is it under?
+License: MIT + file LICENSE
 Encoding: UTF-8
-Imports: Rcpp, Rdpack, TDA, energy, ggplot2, stats, utils
+Imports: Rcpp, Rdpack, TDA, TDAkit, energy, ggplot2, stats, utils
 LinkingTo: Rcpp, RcppArmadillo
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1
 RdMacros: Rdpack
