@@ -1,6 +1,8 @@
 ## AUXILIARY : CHECKERS
-#  (01) check_diagram        : (T/F) for Persistence Diagram
-#  (02) check_list_landscape : check a list of landscapes of same dimension
+#  (01) check_diagram         : (T/F) for Persistence Diagram
+#  (02) check_list_landscape  : check a list of landscapes of same dimension
+#  (03) check_list_summaries  : check a list of functional summaries
+#  (04) check_list_silhouette : check a list of silhouettes
 
 
 
@@ -21,6 +23,8 @@ check_diagram <- function(diagram){
 }
 
 # (02) check_list_landscape -----------------------------------------------
+#' @keywords internal
+#' @noRd
 check_list_landscape <- function(dlist){
   cond1 = (is.list(dlist)&&(length(dlist)>1))
   cond2 = all(unlist(lapply(dlist, inherits, "landscape"))==TRUE)
@@ -31,6 +35,38 @@ check_list_landscape <- function(dlist){
   }
   cond3 = (length(unique(vd))==1)
   if (cond1&&cond2&&cond3){
+    return(TRUE)
+  } else {
+    return(FALSE)
+  }
+}
+
+# (03) check_list_summaries : check a list of functional summaries --------
+#' @keywords internal
+#' @noRd
+check_list_summaries <- function(fname, dlist){
+  if (!(is.list(dlist)&&(length(dlist)>1))){
+    stop(paste0("* ",fname," : 'fslist' is not a list of length > 1."))
+  }
+  N = length(dlist)
+  clvec = rep("",N)
+  for (n in 1:N){
+    clvec[n] = class(dlist[[n]])
+  }
+  if (length(unique(clvec))!=1){
+    stop(paste0("* ",fname," : 'fslist' consists of heterogeneous objects."))
+  }
+  return(clvec[1])
+}
+
+
+# (04) check_list_silhouette ----------------------------------------------
+#' @keywords internal
+#' @noRd
+check_list_silhouette <- function(slist){
+  cond1 = (is.list(slist)&&(length(slist)>1))
+  cond2 = all(unlist(lapply(slist, inherits, "silhouette"))==TRUE)
+  if (cond1&&cond2){
     return(TRUE)
   } else {
     return(FALSE)

@@ -4,10 +4,10 @@
 \alias{diag2silhouette}
 \title{Convert Persistence Diagram into Persistent Silhouette}
 \usage{
-diag2silhouette(diagram, dimension = 1, p = 2, nseq = 100)
+diag2silhouette(homology, dimension = 1, p = 2, nseq = 100)
 }
 \arguments{
-\item{diagram}{diagram object generated from \code{diagRips} or other diagram-generating functions.}
+\item{homology}{an object of S3 class \code{"homology"} generated from \code{diagRips} or other diagram-generating functions.}
 
 \item{dimension}{dimension of features to be considered (default: 1).}
 
@@ -24,7 +24,7 @@ a list object of \code{"silhouette"} class containing\describe{
 }
 \description{
 Persistence Silhouette (PS) is a functional summary of persistent homology 
-that is constructed given a persistence diagram. PS is a weighted average of 
+that is constructed given a \code{homology} object. PS is a weighted average of 
 landscape functions so that it becomes a uni-dimensional function.
 }
 \examples{

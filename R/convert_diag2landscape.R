@@ -1,12 +1,12 @@
-#' Convert Persistence Diagram into Persistent Landscape
+#' Convert Persistence Diagram into Persistence Landscape
 #' 
 #' Persistence Landscape (PL) is a functional summary of persistent homology 
-#' that is constructed given a persistence diagram. 
+#' that is constructed given a \code{homology} object. 
 #' 
-#' @param diagram diagram object generated from \code{diagRips} or other diagram-generating functions.
+#' @param homology an object of S3 class \code{"homology"} generated from \code{diagRips} or other homology-generating functions.
 #' @param dimension dimension of features to be considered (default: 1).
-#' @param k the number of top landscape functions to be used (default: 0). When \code{k=0} is set, it gives all relevant landscape functions that are non-zero, which is not a good convention since it means landscape functions of noise parts are included.
-#' @param nseq grid size for which the landscape function is evaluated. 
+#' @param k the number of top landscape functions to be used (default: 0). When \code{k=0} is set, it gives all relevant landscape functions that are non-zero.
+#' @param nseq grid size for which the landscape function is evaluated (default: 1000).
 #' 
 #' @return a list object of \code{"landscape"} class containing\describe{
 #' \item{lambda}{an \eqn{(\code{nseq} \times k)} landscape functions.}
@@ -15,6 +15,7 @@
 #' }
 #' 
 #' @examples 
+#' \donttest{
 #' # ---------------------------------------------------------------------------
 #' #              Persistence Landscape of 'iris' Dataset
 #' #
@@ -41,27 +42,27 @@
 #' matplot(land1$tseq, land1$lambda, type="l", lwd=3, main="dimension 1", xlab="t")
 #' matplot(land2$tseq, land2$lambda, type="l", lwd=3, main="dimension 2", xlab="t")
 #' par(opar)
-#' 
+#' }
 #' @references 
 #' \insertRef{bubenik_persistence_2018}{TDAkit}
 #' 
 #' @concept convert
 #' @export
-diag2landscape <- function(diagram, dimension=1, k=0, nseq=100){
+diag2landscape <- function(homology, dimension=1, k=0, nseq=1000){
   ## PREPROCESSING
-  #  diagram
-  if (!check_diagram(diagram)){
-    stop("* diag2landscape : input 'diagram' is not a valid diagram object. Please use an output from 'diagRips' or other PD construction algorithms.")
+  #  homology
+  if (!inherits(homology,"homology")){
+    stop("* diag2landscape : input 'homology' is not a valid homology object. Please use an output from 'diagRips' or other construction algorithms.")
   }
   #  dimension
   dimension = round(dimension) # target dimension : cannot be multiple
-  if (!(dimension %in% diagram$Dimension)){
-    stop("* diag2landscape : input 'dimension' does not have corresponding information in the given 'diagram'.")
+  if (!(dimension %in% homology$Dimension)){
+    stop("* diag2landscape : input 'dimension' does not have corresponding information in the given 'homology'.")
   }
-  idin      = which(diagram$Dimension==dimension)
-  dat.dim   = round(diagram$Dimension[idin])
-  dat.birth = diagram$Birth[idin]
-  dat.death = diagram$Death[idin]
+  idin      = which(homology$Dimension==dimension)
+  dat.dim   = round(homology$Dimension[idin])
+  dat.birth = homology$Birth[idin]
+  dat.death = homology$Death[idin]
   #  others
   myk = ifelse((round(k)<1), length(dat.birth), round(k))               # number of landscape functions
   myt = seq(from=0, to=max(dat.death), length.out=max(10, round(nseq))) # time sequence part  

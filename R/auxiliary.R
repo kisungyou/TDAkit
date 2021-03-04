@@ -1,12 +1,7 @@
 # Auxiliary Functions -----------------------------------------------------
-# (1) check_list_landscape  : see if it is a list of landscapes
-#     check_list_silhouette 
 #     check_list_apf
 #     check_list_napf
 
-# (3) adjust_list_silhouette 
-#         - as.list = TRUE;  return as list with common tseq
-#         - as.list = FALSE; list$array 2d array (T,nlist) & list$tseq
 # (4) adjust_list_apf
 #         - as.list = TRUE;  return as list with common tseq
 #         - as.list = FALSE; list$array 2d array (T,nlist) & list$tseq
@@ -19,19 +14,7 @@
 #     compute_median_sgd
 #     compute_median_asgd
 
-# (1) check_list_landscape ------------------------------------------------
 
-#' @keywords internal
-#' @noRd
-check_list_silhouette <- function(slist){
-  cond1 = (is.list(slist)&&(length(slist)>1))
-  cond2 = all(unlist(lapply(slist, inherits, "kit.silhouette"))==TRUE)
-  if (cond1&&cond2){
-    return(TRUE)
-  } else {
-    return(FALSE)
-  }
-}
 #' @keywords internal
 #' @noRd
 check_list_apf <- function(alist){
@@ -56,64 +39,6 @@ check_list_napf <- function(alist){
 }
 
 
-
-# (3) adjust_list_silhouette ----------------------------------------------
-#' @keywords internal
-#' @noRd
-adjust_list_silhouette <- function(slist, as.list=TRUE){
-  # 1. check if it is a list of landscapes
-  if (!check_list_silhouette(slist)){
-    stop("* adjust_list_silhouette : the given input is not a proper list of silhouettes.")
-  }
-  # 2. check same dimension or not
-  nlist   = length(slist)
-  vec.dim = rep(0,nlist)
-  for (i in 1:nlist){
-    vec.dim[i] = slist[[i]]$dimension
-  }
-  if (length(unique(vec.dim))!=1){
-    stop("* adjust_list_silhouette : all silhouettes should be computed for the same dimension.")
-  }
-  # 3. extract common tseq
-  mytmin = 0
-  mytmax = 0
-  mytlength = 0
-  for (i in 1:nlist){
-    cseq = slist[[i]]$tseq
-    if (min(cseq) <= mytmin){      mytmin = min(cseq)    }
-    if (max(cseq) >= mytmax){      mytmax = max(cseq)    }
-    if (length(cseq) > mytlength){      mytlength = length(cseq)    }
-  }
-  mytseq = base::seq(from=mytmin, to=mytmax, length=mytlength)
-  
-  # 4. transform
-  arrayout = array(0,c(length(mytseq), nlist))
-  listout  = list()
-  for (i in 1:nlist){
-    tgti = slist[[i]]
-    ytmp = stats::approx(tgti$tseq, tgti$lambda, xout=mytseq)$y
-    ytmp[is.na(ytmp)] = 0.0
-    ytmp[(ytmp<0.0)]  = 0.0
-    if (as.list){
-      tmplist = list(lambda=ytmp, tseq=mytseq, dimension=tgti$dimension)
-      class(tmplist) = "kit.silhouette"
-      listout[[i]]   = tmplist
-    } else {
-      arrayout[,i] = ytmp
-    }
-  }
-  arrayout[is.na(arrayout)]=0.0
-  arrayout[(arrayout < 0)] =0.0
-  # 5. return
-  if (as.list){
-    return(listout)
-  } else {
-    output = list()
-    output$array = arrayout
-    output$tseq  = mytseq
-    return(output)
-  }
-}
 
 # (4) adjust_list_apf -----------------------------------------------------
 #' @keywords internal

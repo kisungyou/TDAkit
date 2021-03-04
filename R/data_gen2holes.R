@@ -35,8 +35,12 @@ gen2holes <- function(n=496, sd=0){
   ## GENERATE
   n1 = round(myn/2)
   n2 = round(myn-n1)
-  x1 = TDA::circleUnif(n1)
-  x2 = TDA::circleUnif(n2)
+  
+  theta1 = stats::runif(n1, min=0, max=2*pi)
+  theta2 = stats::runif(n2, min=0, max=2*pi)
+  
+  x1 = cbind(base::cos(theta1), base::sin(theta1))
+  x2 = cbind(base::cos(theta2), base::sin(theta2))
   x2[,1] = x2[,1] + 1.25
   xx = rbind(x1,x2)
   if (sd > 0){

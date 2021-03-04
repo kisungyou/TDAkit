@@ -2,18 +2,18 @@
 % Please edit documentation in R/convert_diag2landscape.R
 \name{diag2landscape}
 \alias{diag2landscape}
-\title{Convert Persistence Diagram into Persistent Landscape}
+\title{Convert Persistence Diagram into Persistence Landscape}
 \usage{
-diag2landscape(diagram, dimension = 1, k = 0, nseq = 100)
+diag2landscape(homology, dimension = 1, k = 0, nseq = 1000)
 }
 \arguments{
-\item{diagram}{diagram object generated from \code{diagRips} or other diagram-generating functions.}
+\item{homology}{an object of S3 class \code{"homology"} generated from \code{diagRips} or other homology-generating functions.}
 
 \item{dimension}{dimension of features to be considered (default: 1).}
 
-\item{k}{the number of top landscape functions to be used (default: 0). When \code{k=0} is set, it gives all relevant landscape functions that are non-zero, which is not a good convention since it means landscape functions of noise parts are included.}
+\item{k}{the number of top landscape functions to be used (default: 0). When \code{k=0} is set, it gives all relevant landscape functions that are non-zero.}
 
-\item{nseq}{grid size for which the landscape function is evaluated.}
+\item{nseq}{grid size for which the landscape function is evaluated (default: 1000).}
 }
 \value{
 a list object of \code{"landscape"} class containing\describe{
@@ -24,9 +24,10 @@ a list object of \code{"landscape"} class containing\describe{
 }
 \description{
 Persistence Landscape (PL) is a functional summary of persistent homology 
-that is constructed given a persistence diagram.
+that is constructed given a \code{homology} object.
 }
 \examples{
+\donttest{
 # ---------------------------------------------------------------------------
 #              Persistence Landscape of 'iris' Dataset
 #
@@ -53,7 +54,7 @@ matplot(land0$tseq, land0$lambda, type="l", lwd=3, main="dimension 0", xlab="t")
 matplot(land1$tseq, land1$lambda, type="l", lwd=3, main="dimension 1", xlab="t")
 matplot(land2$tseq, land2$lambda, type="l", lwd=3, main="dimension 2", xlab="t")
 par(opar)
-
+}
 }
 \references{
 \insertRef{bubenik_persistence_2018}{TDAkit}

@@ -1,10 +1,10 @@
 #' Convert Persistence Diagram into Persistent Silhouette
 #' 
 #' Persistence Silhouette (PS) is a functional summary of persistent homology 
-#' that is constructed given a persistence diagram. PS is a weighted average of 
+#' that is constructed given a \code{homology} object. PS is a weighted average of 
 #' landscape functions so that it becomes a uni-dimensional function.
 #' 
-#' @param diagram diagram object generated from \code{diagRips} or other diagram-generating functions.
+#' @param homology an object of S3 class \code{"homology"} generated from \code{diagRips} or other diagram-generating functions.
 #' @param dimension dimension of features to be considered (default: 1).
 #' @param p an exponent for the weight function of form \eqn{|a-b|^p} (default: 2).
 #' @param nseq grid size for which the landscape function is evaluated. 
@@ -44,21 +44,21 @@
 #' 
 #' @concept convert
 #' @export
-diag2silhouette <- function(diagram, dimension=1, p=2, nseq=100){
+diag2silhouette <- function(homology, dimension=1, p=2, nseq=100){
   ## PREPROCESSING
-  #  diagram
-  if (!check_diagram(diagram)){
-    stop("* diag2silhouette : input 'diagram' is not a valid diagram object. Please use an output from 'diagRips' or other PD construction algorithms.")
+  #  homology
+  if (!inherits(homology,"homology")){
+    stop("* diag2silhouette : input 'homology' is not a valid homology object. Please use an output from 'diagRips' or other construction algorithms.")
   }
   #  dimension
   dimension = round(dimension) # target dimension : cannot be multiple
-  if (!(dimension %in% diagram$Dimension)){
-    stop("* diag2silhouette : input 'dimension' does not have corresponding information in the given 'diagram'.")
+  if (!(dimension %in% homology$Dimension)){
+    stop("* diag2silhouette : input 'dimension' does not have corresponding information in the given 'homology'.")
   }
-  idin      = which(diagram$Dimension==dimension)
-  dat.dim   = round(diagram$Dimension[idin])
-  dat.birth = diagram$Birth[idin]
-  dat.death = diagram$Death[idin]
+  idin      = which(homology$Dimension==dimension)
+  dat.dim   = round(homology$Dimension[idin])
+  dat.birth = homology$Birth[idin]
+  dat.death = homology$Death[idin]
   #  weight function
   myp = max(1, as.double(p))
   myt = seq(from=0, to=max(dat.death), length.out=max(10, round(nseq))) # time sequence part  
