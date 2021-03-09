@@ -16,7 +16,7 @@
   
   ## Print on Screen
   packageStartupMessage("** --------------------------------------------------------- **")
-  packageStartupMessage("** TDAkit :: Extended Toolkit for Topological Data Analysis")
+  packageStartupMessage("**          Toolkit for Topological Data Analysis")
   packageStartupMessage("**")
   packageStartupMessage("** Version    : ",this.version,"      (",this.year,")",sep="")
   packageStartupMessage("** Maintainer : Kisung You (kyoustat@gmail.com)")

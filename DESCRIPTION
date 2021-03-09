@@ -1,9 +1,9 @@
 Package: TDAkit
 Type: Package
-Title: Extended Toolkit for Topological Data Analysis
+Title: Toolkit for Topological Data Analysis
 Version: 0.1.0
 Authors@R: c(person("Kisung", "You", role = c("aut", "cre"),email = "kyoustat@gmail.com",comment=c(ORCID="0000-0002-8584-459X")),person("Byeongsu","Yu", role="aut",email="byeongsu.yu@math.tamu.edu"))
-Description: More about what it does (maybe more than one line)
+Description: Topological data analysis studies structure and shape of the data using topological features. We provide a variety of algorithms to learn with persistent homology of the data based on functional summaries for clustering, hypothesis testing, visualization, and others. We refer to Wasserman (2018) <doi:10.1146/annurev-statistics-031017-100045> for a statistical perspective on the topic. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 Imports: Rcpp, Rdpack, TDAstats, energy, ggplot2, maotai, stats, utils

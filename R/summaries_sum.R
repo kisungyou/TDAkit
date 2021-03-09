@@ -6,7 +6,7 @@
 #' with a specified vector of given weights \eqn{w_1,w_2,\ldots,w_N}.
 #' 
 #' @param fslist a length-\eqn{N} list of functional summaries of persistent diagrams.
-#' @param weight a weight vector of length \eqn{N}. If \code{NULL} (default), weights are automatically set as \eqn{w_1=\cdots=\w_N = 1/N}.
+#' @param weight a weight vector of length \eqn{N}. If \code{NULL} (default), weights are automatically set as \eqn{w_1=\cdots=w_N = 1/N}.
 #' 
 #' @return a functional summary object.
 #' 

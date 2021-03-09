@@ -44,7 +44,7 @@
 #' par(opar)
 #' }
 #' @references 
-#' \insertRef{bubenik_persistence_2018}{TDAkit}
+#' Peter Bubenik (2018). ``The Persistence Landscape and Some of Its Properties.'' \emph{arXiv:1810.04963}.
 #' 
 #' @concept convert
 #' @export

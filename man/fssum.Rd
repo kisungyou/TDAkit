@@ -9,7 +9,7 @@ fssum(fslist, weight = NULL)
 \arguments{
 \item{fslist}{a length-\eqn{N} list of functional summaries of persistent diagrams.}
 
-\item{weight}{a weight vector of length \eqn{N}. If \code{NULL} (default), weights are automatically set as \eqn{w_1=\cdots=\w_N = 1/N}.}
+\item{weight}{a weight vector of length \eqn{N}. If \code{NULL} (default), weights are automatically set as \eqn{w_1=\cdots=w_N = 1/N}.}
 }
 \value{
 a functional summary object.

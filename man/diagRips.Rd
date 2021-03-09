@@ -51,7 +51,7 @@ par(opar)
 \references{
 \insertRef{wadhwa_tdastats_2018}{TDAkit}
 
-\insertRef{bauer_ripser_2019}{TDAkit}
+Ulrich Bauer (2019). ``Ripser: Efficient Computation of Vietoris-Rips Persistence Barcodes.'' \emph{arXiv:1908.02518}.
 }
 \seealso{
 \code{\link[TDAstats]{calculate_homology}}
