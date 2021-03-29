@@ -70,15 +70,16 @@
 #' @concept summaries
 #' @export
 fstsne <- function(fslist, ndim=2, ...){
-  ## PREPROCESSING
-  dtype  = check_list_summaries("fstsne", fslist)
-  myndim = max(2, round(ndim))
-  
-  ## PAIRWISE DISTANCE
-  distobj = TDAkit::fsdist(fslist, p=2, as.dist=TRUE)
-  
-  ## RUN VIA MAOTAI
+  myndim      = max(2, round(ndim))
   func.import = utils::getFromNamespace("hidden_tsne", "maotai")
-  out.tsne    = func.import(distobj, ndim=myndim, ...)
+  
+  if (inherits(fslist, "dist")){
+    out.tsne = func.import(fslist, ndim=myndim, ...)
+  } else {
+    dtype    = check_list_summaries("fstsne", fslist)
+    distobj  = TDAkit::fsdist(fslist, p=2, as.dist=TRUE)
+    out.tsne = func.import(distobj, ndim=myndim, ...)
+  }
+  
   return(out.tsne)
 }

@@ -6,6 +6,7 @@
 #' @aliases TDAkit-package
 #' @import ggplot2
 #' @import maotai
+#' @importFrom T4cluster sc05Z
 #' @importFrom Rdpack reprompt Rdpack_bibstyles
 #' @importFrom TDAstats calculate_homology
 #' @importFrom energy eqdist.etest kgroups energy.hclust

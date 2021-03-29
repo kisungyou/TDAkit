@@ -61,14 +61,16 @@
 #' @concept summaries
 #' @export
 fsmds <- function(fslist, ndim=2, method=c("classical","metric")){
-  ## PREPROCESSING
-  dtype = check_list_summaries("fsmds", fslist)
   mydim = max(1, round(ndim))
   mymds = match.arg(method)
   
-  ## COMPUTE PAIRWISE DISTANCE
-  pdist = TDAkit::fsdist(fslist, p=2, as.dist=TRUE)
-  
+  if (inherits(fslist, "dist")){
+    pdist = fslist
+  } else {
+    dtype = check_list_summaries("fsmds", fslist)
+    pdist = TDAkit::fsdist(fslist, p=2, as.dist=TRUE)
+  }
+
   ## MDS FROM MAOTAI
   if (all(mymds=="classical")){
     func.import = utils::getFromNamespace("hidden_cmds","maotai")

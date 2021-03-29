@@ -62,7 +62,6 @@
 #' @export
 fskgroups <- function(fslist, k=2, ...){
   ## PREPROCESSING
-  dtype    = check_list_summaries("fskgroups", fslist)
   myk      = max(1, round(k))
   params   = list(...)
   pnames   = names(params)
@@ -70,8 +69,13 @@ fskgroups <- function(fslist, k=2, ...){
   mynstart = max(2, ifelse(("nstart"%in%pnames), params$nstart, 2))
   
   ## COMPUTE 2-NORM
-  dmat = TDAkit::fsdist(fslist, p=2, as.dist = TRUE)
-  
+  if (inherits(fslist, "dist")){
+    dmat  = fslist
+  } else {
+    dtype = check_list_summaries("fskgroups", fslist)
+    dmat  = TDAkit::fsdist(fslist, p=2, as.dist = TRUE)
+  }
+
   ## APPLY ENERGY'S K-GROUPS
   output = energy::kgroups(dmat, myk, nstart=mynstart, iter.max=myiter)
   return(as.vector(output$cluster))

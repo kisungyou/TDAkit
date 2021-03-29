@@ -53,17 +53,21 @@
 #' @export
 fseqdist <- function(fslist, label, method=c("original","disco"), mc.iter=999){
   ## PREPROCESSING
-  dtype = check_list_summaries("fseqdist", fslist)
-  label = as.factor(label)
-  if (length(label)!=length(fslist)){
-    stop("* fseqdist : length of 'label' must be equal to length of 'fslist'.")
-  }
+  label    = as.factor(label)
   mymethod = match.arg(method)
   myiter   = max(99, round(mc.iter))
   
   ## L2 DISTANCE
-  dmat = TDAkit::fsdist(fslist, p=2, as.dist=FALSE)
-  dobj = stats::as.dist(dmat)
+  if (inherits(fslist, "dist")){
+    dobj = fslist
+  } else {
+    dtype = check_list_summaries("fseqdist", fslist)
+    dmat  = TDAkit::fsdist(fslist, p=2, as.dist=FALSE)
+    dobj  = stats::as.dist(dmat)  
+  }
+  if (attr(dobj, "Size")!=length(label)){
+    stop("* fseqdist : length of 'label' must be equal to length of 'fslist'.")
+  }
   
   ## LABEL
   ulabels = sort(unique(label), decreasing = FALSE)

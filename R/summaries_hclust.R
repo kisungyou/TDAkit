@@ -60,12 +60,17 @@
 fshclust <- function(fslist, method = c("single", "complete", "average", "mcquitty", "ward.D", "ward.D2",
                                         "centroid", "median"), members=NULL){
   ## PREPROCESSING
-  dtype     = check_list_summaries("fseqdist", fslist)
   mymethod  = match.arg(method)
   mymembers = members
   
   ## PAIRWISE DISTANCE
-  pdmat   = TDAkit::fsdist(fslist, p=2, as.dist=TRUE)
+  if (inherits(fslist, "dist")){
+    pdmat = fslist
+  } else {
+    dtype = check_list_summaries("fseqdist", fslist)
+    pdmat = TDAkit::fsdist(fslist, p=2, as.dist=TRUE)
+  }
+  
   
   ## RUN VIA MAOTAI
   fimport = utils::getFromNamespace("hidden_hclust", "maotai")
