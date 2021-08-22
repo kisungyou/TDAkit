@@ -6,6 +6,11 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // simple_integral
 double simple_integral(arma::mat& lmat, arma::vec tseq);
 RcppExport SEXP _TDAkit_simple_integral(SEXP lmatSEXP, SEXP tseqSEXP) {

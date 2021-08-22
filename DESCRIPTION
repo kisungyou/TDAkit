@@ -1,8 +1,8 @@
 Package: TDAkit
 Type: Package
 Title: Toolkit for Topological Data Analysis
-Version: 0.1.1
-Authors@R: c(person("Kisung", "You", role = c("aut", "cre"),email = "kyoustat@gmail.com",comment=c(ORCID="0000-0002-8584-459X")),person("Byeongsu","Yu", role="aut",email="byeongsu.yu@math.tamu.edu"))
+Version: 0.1.2
+Authors@R: c(person("Kisung", "You", role = c("aut", "cre"),email = "kisungyou@outlook.com",comment=c(ORCID="0000-0002-8584-459X")),person("Byeongsu","Yu", role="aut",email="byeongsu.yu@math.tamu.edu"))
 Description: Topological data analysis studies structure and shape of the data using topological features. We provide a variety of algorithms to learn with persistent homology of the data based on functional summaries for clustering, hypothesis testing, visualization, and others. We refer to Wasserman (2018) <doi:10.1146/annurev-statistics-031017-100045> for a statistical perspective on the topic. 
 License: MIT + file LICENSE
 Encoding: UTF-8

@@ -1,3 +1,7 @@
+# TDAkit 0.1.2
+
+* Change of maintainer's contact.
+
 # TDAkit 0.1.1
 
 * Added `plkernel` to compute the persistence landscape kernel.
