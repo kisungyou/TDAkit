@@ -2,22 +2,22 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 simple_integral <- function(lmat, tseq) {
-    .Call('_TDAkit_simple_integral', PACKAGE = 'TDAkit', lmat, tseq)
+    .Call(`_TDAkit_simple_integral`, lmat, tseq)
 }
 
 simple_integral_1d <- function(lvec, tseq) {
-    .Call('_TDAkit_simple_integral_1d', PACKAGE = 'TDAkit', lvec, tseq)
+    .Call(`_TDAkit_simple_integral_1d`, lvec, tseq)
 }
 
 routine_mds <- function(dmat, ndim) {
-    .Call('_TDAkit_routine_mds', PACKAGE = 'TDAkit', dmat, ndim)
+    .Call(`_TDAkit_routine_mds`, dmat, ndim)
 }
 
 compute_slicemean <- function(dcube) {
-    .Call('_TDAkit_compute_slicemean', PACKAGE = 'TDAkit', dcube)
+    .Call(`_TDAkit_compute_slicemean`, dcube)
 }
 
 compute_slicewsum <- function(dcube, weight) {
-    .Call('_TDAkit_compute_slicewsum', PACKAGE = 'TDAkit', dcube, weight)
+    .Call(`_TDAkit_compute_slicewsum`, dcube, weight)
 }
 

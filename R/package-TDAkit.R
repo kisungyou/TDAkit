@@ -1,8 +1,7 @@
 #' Extended Toolkit for Topological Data Analysis
-#'
-#' @docType package
-#' @name TDAkit
+#' 
 #' @noRd
+#' @name TDAkit
 #' @aliases TDAkit-package
 #' @import ggplot2
 #' @import maotai
@@ -13,5 +12,5 @@
 #' @importFrom utils packageVersion
 #' @importFrom stats approx rnorm runif
 #' @importFrom Rcpp evalCpp
-#' @useDynLib TDAkit
+#' @useDynLib TDAkit, .registration = TRUE
 NULL
